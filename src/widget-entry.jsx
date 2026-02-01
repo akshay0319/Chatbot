@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ChatKit, useChatKit } from '@openai/chatkit-react';
 
@@ -136,87 +136,11 @@ import { ChatKit, useChatKit } from '@openai/chatkit-react';
       .chatbot-content {
         flex: 1;
         overflow: hidden;
-        position: relative;
-      }
-      .starter-prompts-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc(100% - 40px);
-        max-width: 340px;
-        background: white;
-        z-index: 1000;
-        animation: fadeIn 0.4s ease-out;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translate(-50%, -45%);
-        }
-        to {
-          opacity: 1;
-          transform: translate(-50%, -50%);
-        }
-      }
-      .starter-prompts-welcome {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .starter-prompts-welcome h4 {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        font-size: 18px;
-        font-weight: 600;
-        color: #333;
-        margin: 0;
-      }
-      .starter-prompts-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .starter-prompt-btn {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px;
-        background: #f8f9fa;
-        border: 2px solid #e9ecef;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        font-size: 15px;
-        color: #495057;
-        text-align: left;
-        width: 100%;
-      }
-      .starter-prompt-btn:hover {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: #667eea;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-      }
-      .starter-prompt-icon {
-        font-size: 24px;
-        flex-shrink: 0;
-      }
-      .starter-prompt-text {
-        flex: 1;
-        font-weight: 500;
       }
       @media (max-width: 768px) {
         .chatbot-container {
           width: calc(100vw - 40px);
           height: calc(100vh - 120px);
-        }
-        .starter-prompts-container {
-          width: calc(100% - 30px);
-        }
-        .starter-prompt-btn {
-          padding: 14px;
-          font-size: 14px;
         }
       }
     `;
@@ -281,41 +205,8 @@ import { ChatKit, useChatKit } from '@openai/chatkit-react';
     );
   }
 
-  // Starter Prompts Component
-  function StarterPrompts({ onSelect }) {
-    const prompts = [
-      { text: 'What products do you sell?', icon: '🛍️' },
-      { text: 'How can I place an order?', icon: '🛒' },
-      { text: 'Where is my order?', icon: '📦' },
-      { text: 'How can I contact support?', icon: '💬' }
-    ];
-
-    return (
-      <div className="starter-prompts-container">
-        <div className="starter-prompts-welcome">
-          <h4>👋 Welcome! How can I help you today?</h4>
-        </div>
-        <div className="starter-prompts-grid">
-          {prompts.map((prompt, index) => (
-            <button
-              key={index}
-              className="starter-prompt-btn"
-              onClick={() => onSelect(prompt.text)}
-            >
-              <span className="starter-prompt-icon">{prompt.icon}</span>
-              <span className="starter-prompt-text">{prompt.text}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   // Chat Widget Component
   function ChatWidget({ config, onClose }) {
-    const [showStarters, setShowStarters] = useState(true);
-    const [isReady, setIsReady] = useState(false);
-
     const { control } = useChatKit({
       api: {
         async getClientSecret(existing) {
@@ -352,22 +243,28 @@ import { ChatKit, useChatKit } from '@openai/chatkit-react';
           }
         },
       },
+      startScreen: {
+        greeting: "How can I help you today?",
+        prompts: [
+          {
+            label: "What products do you sell?",
+            prompt: "What products do you sell?"
+          },
+          {
+            label: "How can I place an order?",
+            prompt: "How can I place an order?"
+          },
+          {
+            label: "Where is my order?",
+            prompt: "Where is my order?"
+          },
+          {
+            label: "How can I contact support?",
+            prompt: "How can I contact support?"
+          }
+        ]
+      }
     });
-
-    // Wait for control to be ready
-    useEffect(() => {
-      if (control) {
-        setIsReady(true);
-      }
-    }, [control]);
-
-    // Handle starter prompt selection
-    const handlePromptSelect = (text) => {
-      if (control && control.sendMessage) {
-        control.sendMessage(text);
-        setShowStarters(false);
-      }
-    };
 
     return (
       <>
@@ -381,9 +278,6 @@ import { ChatKit, useChatKit } from '@openai/chatkit-react';
         </div>
         <div className="chatbot-content">
           <ChatKit control={control} style={{ width: '100%', height: '100%' }} />
-          {showStarters && isReady && (
-            <StarterPrompts onSelect={handlePromptSelect} />
-          )}
         </div>
       </>
     );
