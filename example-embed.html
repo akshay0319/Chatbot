@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example: Embed Chatbot on Any Website</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .container {
+      background: white;
+      color: #333;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    h1 {
+      color: #667eea;
+      margin-top: 0;
+    }
+    .code-block {
+      background: #f5f5f5;
+      border-left: 4px solid #667eea;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    pre {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .note {
+      background: #e7f3ff;
+      border-left: 4px solid #2196F3;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 How to Embed This Chatbot on Your Website</h1>
+
+    <p>This page demonstrates how <strong>anyone</strong> can add your AI chatbot to their website with just a simple script.</p>
+
+    <div class="note">
+      <strong>📌 Note:</strong> Replace <span class="highlight">https://your-project.vercel.app</span> with your actual Vercel deployment URL after you deploy!
+    </div>
+
+    <h2>Step 1: Copy This Script</h2>
+    <div class="code-block">
+      <pre>&lt;script&gt;
+  window.CHATBOT_API_URL = '<strong>https://your-project.vercel.app</strong>';
+  window.CHATBOT_TITLE = 'Support Chat'; // Optional
+&lt;/script&gt;
+&lt;script src="<strong>https://your-project.vercel.app/chatbot.js</strong>" async&gt;&lt;/script&gt;</pre>
+    </div>
+
+    <h2>Step 2: Paste Before Closing &lt;/body&gt; Tag</h2>
+    <p>Open your HTML file and paste the script just before the closing <code>&lt;/body&gt;</code> tag.</p>
+
+    <h2>Step 3: Done! 🎉</h2>
+    <div class="success">
+      ✅ A purple chat button will appear in the bottom-right corner<br>
+      ✅ Click it to chat with your AI agent<br>
+      ✅ Works on mobile and desktop<br>
+      ✅ No CSS conflicts with your website
+    </div>
+
+    <h2>📋 Full Example Page</h2>
+    <div class="code-block">
+      <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+  &lt;p&gt;This is my website content...&lt;/p&gt;
+
+  &lt;!-- Add chatbot widget here --&gt;
+  &lt;script&gt;
+    window.CHATBOT_API_URL = 'https://your-project.vercel.app';
+    window.CHATBOT_TITLE = 'Help & Support';
+  &lt;/script&gt;
+  &lt;script src="https://your-project.vercel.app/chatbot.js" async&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    </div>
+
+    <h2>🎨 Customization Options</h2>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <tr style="background: #f5f5f5;">
+        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Variable</th>
+        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Description</th>
+        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Required</th>
+      </tr>
+      <tr>
+        <td style="padding: 12px; border: 1px solid #ddd;"><code>CHATBOT_API_URL</code></td>
+        <td style="padding: 12px; border: 1px solid #ddd;">Your Vercel deployment URL</td>
+        <td style="padding: 12px; border: 1px solid #ddd;">✅ Yes</td>
+      </tr>
+      <tr style="background: #f9f9f9;">
+        <td style="padding: 12px; border: 1px solid #ddd;"><code>CHATBOT_TITLE</code></td>
+        <td style="padding: 12px; border: 1px solid #ddd;">Custom chat window title</td>
+        <td style="padding: 12px; border: 1px solid #ddd;">❌ No (default: "Chat Assistant")</td>
+      </tr>
+    </table>
+
+    <h2>💼 Use Cases</h2>
+    <ul>
+      <li><strong>E-commerce:</strong> Product recommendations, order support</li>
+      <li><strong>SaaS:</strong> Customer support, onboarding</li>
+      <li><strong>Blogs:</strong> Content assistant</li>
+      <li><strong>Business Websites:</strong> Lead generation, FAQs</li>
+      <li><strong>Any Website:</strong> It works everywhere!</li>
+    </ul>
+
+    <div class="note">
+      <strong>👉 Look at the bottom-right corner!</strong> If you're viewing this page with the widget loaded, you should see the chat button there.
+    </div>
+  </div>
+
+  <!--
+    ============================================
+    EXAMPLE: The actual chatbot widget embedded
+    ============================================
+
+    For LOCAL TESTING, uncomment the lines below.
+    For PRODUCTION, replace with your Vercel URL.
+  -->
+
+  <!-- LOCAL TESTING (uncomment to test locally) -->
+  <!--
+  <script>
+    window.CHATBOT_API_URL = 'http://localhost:5173';
+    window.CHATBOT_TITLE = 'Example Bot';
+  </script>
+  <script src="http://localhost:5173/chatbot.js" async></script>
+  -->
+
+  <!-- PRODUCTION (after deploying to Vercel) -->
+  <!--
+  <script>
+    window.CHATBOT_API_URL = 'https://your-project.vercel.app';
+    window.CHATBOT_TITLE = 'Support Chat';
+  </script>
+  <script src="https://your-project.vercel.app/chatbot.js" async></script>
+  -->
+
+</body>
+</html>
