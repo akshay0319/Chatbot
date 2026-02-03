@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:api": "node dev-server.js",
-    "build": "vite build",
+    "build": "vite build && cp index.html dist/index.html",
     "preview": "vite preview"
   },
   "dependencies": {
