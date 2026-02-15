@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechStore - Premium Electronics & Gadgets</title>
+  <title>OrbitAI - Enterprise Chatbot Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -11,17 +14,52 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: #f8f9fa;
-      line-height: 1.6;
-      color: #333;
+    :root {
+      --bg: #ffffff;
+      --ink: #0b1220;
+      --muted: #4a5568;
+      --soft: #f3f6ff;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-2: #00b3ff;
+      --chip: #eff6ff;
+      --shadow: 0 20px 60px rgba(11, 18, 32, 0.08);
     }
 
-    /* Header */
+    body {
+      font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(900px 600px at 10% -10%, #e6f0ff, transparent 70%),
+        radial-gradient(800px 500px at 90% 5%, #e9fbff, transparent 70%),
+        linear-gradient(180deg, #ffffff 0%, #f7f9ff 55%, #ffffff 100%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(120deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+        linear-gradient(300deg, rgba(0, 179, 255, 0.06) 1px, transparent 1px);
+      background-size: 220px 220px, 280px 280px;
+      opacity: 0.35;
+      z-index: -1;
+    }
+
     header {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -30,90 +68,176 @@
     .header-content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 18px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 20px;
     }
 
     .logo {
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 700;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 14px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
     }
 
     .nav-menu {
       display: flex;
-      gap: 30px;
+      gap: 26px;
       list-style: none;
     }
 
     .nav-menu a {
       text-decoration: none;
-      color: #333;
+      color: var(--ink);
       font-weight: 500;
       transition: color 0.3s;
+      font-size: 14px;
     }
 
     .nav-menu a:hover {
-      color: #667eea;
+      color: var(--accent);
     }
 
     .cart-icon {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--ink);
       color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
+      padding: 10px 18px;
+      border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
-      transition: transform 0.3s;
+      transition: transform 0.3s, background 0.3s;
+      font-size: 14px;
     }
 
     .cart-icon:hover {
-      transform: scale(1.05);
+      transform: translateY(-1px);
+      background: #111827;
     }
 
-    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 80px 20px;
+      padding: 90px 20px 70px;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: clamp(36px, 4vw, 56px);
+      margin-bottom: 16px;
       font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     .hero p {
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 30px;
-      opacity: 0.95;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .hero-button {
-      background: white;
-      color: #667eea;
-      padding: 15px 40px;
-      border-radius: 30px;
+      background: var(--ink);
+      color: white;
+      padding: 14px 34px;
+      border-radius: 999px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 24px rgba(11, 18, 32, 0.2);
     }
 
     .hero-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
     }
 
-    /* Products Section */
+    .hero-button.secondary {
+      background: white;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .hero-chip-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .hero-chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-visual {
+      max-width: 900px;
+      margin: 50px auto 0;
+      background: white;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+
+    .hero-panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fbfcff;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-panel h4 {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .hero-panel p {
+      font-size: 13px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-metric {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
     .products-section {
       max-width: 1200px;
       margin: 60px auto;
@@ -126,14 +250,14 @@
     }
 
     .section-header h2 {
-      font-size: 36px;
+      font-size: 32px;
       margin-bottom: 10px;
-      color: #2d3748;
+      color: var(--ink);
     }
 
     .section-header p {
-      font-size: 18px;
-      color: #718096;
+      font-size: 16px;
+      color: var(--muted);
     }
 
     .products-grid {
@@ -145,26 +269,30 @@
 
     .product-card {
       background: white;
-      border-radius: 15px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
       cursor: pointer;
     }
 
     .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(37, 99, 235, 0.3);
     }
 
     .product-image {
       width: 100%;
-      height: 250px;
-      background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+      height: 210px;
+      background: linear-gradient(135deg, #e8f2ff 0%, #f3fbff 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 80px;
+      font-size: 34px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .product-info {
@@ -172,7 +300,7 @@
     }
 
     .product-category {
-      color: #667eea;
+      color: var(--accent);
       font-size: 12px;
       text-transform: uppercase;
       font-weight: 600;
@@ -180,14 +308,14 @@
     }
 
     .product-name {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       margin: 10px 0;
-      color: #2d3748;
+      color: var(--ink);
     }
 
     .product-description {
-      color: #718096;
+      color: var(--muted);
       font-size: 14px;
       margin-bottom: 15px;
       line-height: 1.5;
@@ -197,34 +325,42 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .product-price {
-      font-size: 24px;
+      font-size: 14px;
       font-weight: 700;
-      color: #667eea;
+      color: var(--ink);
+      background: #f8fafc;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
     }
 
     .add-to-cart {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--accent);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
+      padding: 8px 16px;
+      border-radius: 999px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
+      font-size: 13px;
     }
 
     .add-to-cart:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+      background: #1d4ed8;
     }
 
-    /* Features Section */
     .features {
       background: white;
       padding: 60px 20px;
       margin: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .features-container {
@@ -240,38 +376,77 @@
     }
 
     .feature-icon {
-      font-size: 50px;
+      font-size: 38px;
       margin-bottom: 15px;
+      color: var(--accent);
     }
 
     .feature h3 {
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 10px;
-      color: #2d3748;
+      color: var(--ink);
     }
 
     .feature p {
-      color: #718096;
+      color: var(--muted);
       line-height: 1.6;
+      font-size: 14px;
     }
 
-    /* Newsletter */
+    .use-cases {
+      max-width: 1200px;
+      margin: 40px auto 70px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .use-case {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: grid;
+      gap: 8px;
+      min-height: 160px;
+    }
+
+    .use-case span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .use-case h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .use-case p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .newsletter {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: white;
+      color: var(--ink);
       padding: 60px 20px;
       text-align: center;
     }
 
     .newsletter h2 {
-      font-size: 32px;
+      font-size: 30px;
       margin-bottom: 15px;
     }
 
     .newsletter p {
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 30px;
-      opacity: 0.95;
+      color: var(--muted);
     }
 
     .newsletter-form {
@@ -285,16 +460,17 @@
     .newsletter-input {
       flex: 1;
       padding: 15px 20px;
-      border-radius: 30px;
-      border: none;
-      font-size: 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      background: #f8fafc;
     }
 
     .newsletter-button {
-      background: #2d3748;
+      background: var(--accent);
       color: white;
-      padding: 15px 40px;
-      border-radius: 30px;
+      padding: 15px 32px;
+      border-radius: 999px;
       border: none;
       font-weight: 600;
       cursor: pointer;
@@ -302,12 +478,11 @@
     }
 
     .newsletter-button:hover {
-      background: #1a202c;
+      background: #1d4ed8;
     }
 
-    /* Footer */
     footer {
-      background: #2d3748;
+      background: #0b1220;
       color: white;
       padding: 40px 20px;
       text-align: center;
@@ -331,6 +506,7 @@
       text-decoration: none;
       opacity: 0.8;
       transition: opacity 0.3s;
+      font-size: 14px;
     }
 
     .footer-links a:hover {
@@ -341,8 +517,10 @@
       display: flex;
       justify-content: center;
       gap: 20px;
-      font-size: 24px;
+      font-size: 14px;
       margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .social-icons a {
@@ -354,53 +532,36 @@
 
     .social-icons a:hover {
       opacity: 1;
-      transform: scale(1.2);
+      transform: translateY(-2px);
     }
 
-    /* Help Badge */
-    .help-badge {
+    .chatbot-tip {
       position: fixed;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
+      right: 24px;
+      bottom: 92px;
       background: white;
-      padding: 15px;
+      padding: 8px 12px;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      text-align: center;
-      z-index: 99;
-      animation: pulse-badge 2s infinite;
-    }
-
-    @keyframes pulse-badge {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.05); }
-    }
-
-    .help-badge p {
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(11, 18, 32, 0.15);
       font-size: 12px;
-      color: #667eea;
       font-weight: 600;
-      margin-bottom: 5px;
+      color: var(--ink);
+      z-index: 999997;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
     }
 
-    .help-badge span {
-      font-size: 10px;
-      color: #718096;
+    .chatbot-tip.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .nav-menu {
         display: none;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .hero p {
-        font-size: 16px;
       }
 
       .products-grid {
@@ -411,205 +572,280 @@
         flex-direction: column;
       }
 
-      .help-badge {
+      .chatbot-tip {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="header-content">
-      <div class="logo">🛒 TechStore</div>
+      <div class="logo">
+        <div class="logo-badge">AI</div>
+        OrbitAI
+      </div>
       <ul class="nav-menu">
-        <li><a href="#products">Products</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#solutions">Solutions</a></li>
         <li><a href="#features">Features</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#security">Security</a></li>
       </ul>
-      <a href="#cart" class="cart-icon">🛍️ Cart (0)</a>
+      <a href="#contact" class="cart-icon">Book Demo</a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to TechStore</h1>
-    <p>Discover the latest electronics and gadgets at unbeatable prices</p>
-    <a href="#products" class="hero-button">Shop Now</a>
+  <section class="hero" id="platform">
+    <div class="hero-chip-row">
+      <span class="hero-chip">Enterprise AI</span>
+      <span class="hero-chip">Secure by Design</span>
+      <span class="hero-chip">Multi-Channel</span>
+    </div>
+    <h1>Build AI chat experiences that scale across your entire organization.</h1>
+    <p>OrbitAI powers customer support, operations, and internal teams with a unified chatbot platform built for finance, government, education, and commerce.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="hero-button">Request a Demo</a>
+      <a href="#solutions" class="hero-button secondary">See Use Cases</a>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-panel">
+        <h4>Realtime AI Assist</h4>
+        <p>Handle high-volume conversations with reliable routing and compliance guardrails.</p>
+        <div class="hero-metric">98.7% SLA</div>
+      </div>
+      <div class="hero-panel">
+        <h4>Unified Knowledge</h4>
+        <p>Connect policies, product catalogs, and operational playbooks in one place.</p>
+        <div class="hero-metric">24+ Data Sources</div>
+      </div>
+      <div class="hero-panel">
+        <h4>Governed Automation</h4>
+        <p>Deploy workflows that orchestrate approvals, payments, and case resolution.</p>
+        <div class="hero-metric">65% Faster</div>
+      </div>
+    </div>
   </section>
 
-  <!-- Products Section -->
-  <section class="products-section" id="products">
+  <section class="products-section" id="solutions">
     <div class="section-header">
-      <h2>Featured Products</h2>
-      <p>Browse our handpicked selection of premium tech products</p>
+      <h2>Solutions by Industry</h2>
+      <p>Deliver consistent, secure AI experiences for every customer channel.</p>
     </div>
 
     <div class="products-grid">
       <div class="product-card">
-        <div class="product-image">📱</div>
+        <div class="product-image">FIN</div>
         <div class="product-info">
-          <div class="product-category">Smartphones</div>
-          <h3 class="product-name">ProMax Phone X</h3>
-          <p class="product-description">Latest flagship smartphone with advanced AI camera and 5G connectivity</p>
+          <div class="product-category">Finance</div>
+          <h3 class="product-name">Regulatory-Ready Support</h3>
+          <p class="product-description">Automate onboarding, dispute resolution, and account servicing with audit-ready workflows.</p>
           <div class="product-footer">
-            <span class="product-price">$999</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">SOC 2 + PCI</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
-        <div class="product-image">💻</div>
+        <div class="product-image">GOV</div>
         <div class="product-info">
-          <div class="product-category">Laptops</div>
-          <h3 class="product-name">UltraBook Pro</h3>
-          <p class="product-description">Powerful ultrabook with 16GB RAM and stunning 4K display</p>
+          <div class="product-category">Government</div>
+          <h3 class="product-name">Citizen Self-Service</h3>
+          <p class="product-description">Guide residents through complex services with multilingual, policy-aligned answers.</p>
           <div class="product-footer">
-            <span class="product-price">$1,499</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">Case Triage</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
-        <div class="product-image">🎧</div>
+        <div class="product-image">EDU</div>
         <div class="product-info">
-          <div class="product-category">Audio</div>
-          <h3 class="product-name">Noise-Cancel Pro</h3>
-          <p class="product-description">Premium wireless headphones with active noise cancellation</p>
+          <div class="product-category">Education</div>
+          <h3 class="product-name">Student & Staff Assist</h3>
+          <p class="product-description">Answer campus questions, route tickets, and personalize learning support.</p>
           <div class="product-footer">
-            <span class="product-price">$349</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">24/7 Coverage</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
-        <div class="product-image">⌚</div>
+        <div class="product-image">COM</div>
         <div class="product-info">
-          <div class="product-category">Wearables</div>
-          <h3 class="product-name">SmartWatch Elite</h3>
-          <p class="product-description">Fitness tracking smartwatch with health monitoring features</p>
+          <div class="product-category">Commerce</div>
+          <h3 class="product-name">Conversion-Ready Chats</h3>
+          <p class="product-description">Guide shoppers from discovery to checkout with AI product advisors.</p>
           <div class="product-footer">
-            <span class="product-price">$299</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">+32% CVR</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
-        <div class="product-image">📷</div>
+        <div class="product-image">OPS</div>
         <div class="product-info">
-          <div class="product-category">Cameras</div>
-          <h3 class="product-name">4K Pro Camera</h3>
-          <p class="product-description">Professional mirrorless camera with 4K video recording</p>
+          <div class="product-category">Operations</div>
+          <h3 class="product-name">Workflow Automation</h3>
+          <p class="product-description">Connect systems and automate approvals, refunds, and internal escalations.</p>
           <div class="product-footer">
-            <span class="product-price">$1,899</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">Low-Code</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
 
       <div class="product-card">
-        <div class="product-image">🎮</div>
+        <div class="product-image">CX</div>
         <div class="product-info">
-          <div class="product-category">Gaming</div>
-          <h3 class="product-name">GamePad Elite</h3>
-          <p class="product-description">Next-gen gaming console with immersive graphics</p>
+          <div class="product-category">Customer Support</div>
+          <h3 class="product-name">Omnichannel Resolution</h3>
+          <p class="product-description">Deliver consistent answers across web, mobile, and contact center.</p>
           <div class="product-footer">
-            <span class="product-price">$499</span>
-            <button class="add-to-cart">Add to Cart</button>
+            <span class="product-price">Human Handoff</span>
+            <button class="add-to-cart">Explore</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
   <section class="features" id="features">
     <div class="features-container">
       <div class="feature">
-        <div class="feature-icon">🚚</div>
-        <h3>Free Shipping</h3>
-        <p>Free delivery on orders over $50. Fast and reliable shipping worldwide.</p>
+        <div class="feature-icon">⚡</div>
+        <h3>Smart Routing</h3>
+        <p>Route intents, escalate to agents, and protect sensitive data with confidence.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🔒</div>
-        <h3>Secure Payment</h3>
-        <p>100% secure payment with SSL encryption. Your data is always protected.</p>
+        <h3>Enterprise Security</h3>
+        <p>Audit logs, role-based access, and compliance controls built in.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">↩️</div>
-        <h3>Easy Returns</h3>
-        <p>30-day money-back guarantee. Return any product hassle-free.</p>
+        <div class="feature-icon">🧠</div>
+        <h3>Knowledge Studio</h3>
+        <p>Unify FAQs, policies, and documentation with AI-ready indexing.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">💬</div>
-        <h3>24/7 Support</h3>
-        <p>Our AI assistant is here to help anytime. Click the chat icon below!</p>
+        <div class="feature-icon">📡</div>
+        <h3>Always On</h3>
+        <p>Deliver 24/7 support in every language and time zone.</p>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter -->
-  <section class="newsletter">
-    <h2>Subscribe to Our Newsletter</h2>
-    <p>Get exclusive deals and early access to new products</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-      <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-      <button type="submit" class="newsletter-button">Subscribe</button>
+  <section class="products-section" id="security">
+    <div class="section-header">
+      <h2>Security, Governance, and Trust</h2>
+      <p>Meet the standards required by public sector, finance, and regulated industries.</p>
+    </div>
+
+    <div class="use-cases">
+      <div class="use-case">
+        <span>Data Control</span>
+        <h4>Policy-First Access</h4>
+        <p>Define access rules for departments, teams, and data sources in minutes.</p>
+      </div>
+      <div class="use-case">
+        <span>Compliance</span>
+        <h4>Audit Trails</h4>
+        <p>Exportable logs for every conversation and workflow event.</p>
+      </div>
+      <div class="use-case">
+        <span>Reliability</span>
+        <h4>High Availability</h4>
+        <p>Built for large institutions and mission-critical citizen services.</p>
+      </div>
+      <div class="use-case">
+        <span>Governance</span>
+        <h4>Human Oversight</h4>
+        <p>Approve automation steps and reduce risk with human-in-the-loop controls.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter" id="contact">
+    <h2>Ready to launch your AI service layer?</h2>
+    <p>We’ll map your channels, data sources, and rollout plan in a tailored demo.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks! Our team will reach out shortly.');">
+      <input type="email" class="newsletter-input" placeholder="Work email" required>
+      <button type="submit" class="newsletter-button">Request Demo</button>
     </form>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-links">
-        <a href="#about">About Us</a>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Service</a>
-        <a href="#contact">Contact</a>
+        <a href="#platform">Platform</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
       </div>
       <div class="social-icons">
-        <a href="#">📘</a>
-        <a href="#">📷</a>
-        <a href="#">🐦</a>
-        <a href="#">💼</a>
+        <a href="#">in</a>
+        <a href="#">x</a>
+        <a href="#">yt</a>
+        <a href="#">gh</a>
       </div>
-      <p>&copy; 2024 TechStore. All rights reserved. Powered by ChatKit AI Assistant.</p>
+      <p>&copy; 2026 OrbitAI. All rights reserved. Powered by ChatKit AI Assistant.</p>
     </div>
   </footer>
 
-  <!-- Help Badge -->
-  <div class="help-badge">
-    <p>Need Help?</p>
-    <span>Click chat icon →</span>
-  </div>
+  <div class="chatbot-tip" id="chatbot-tip">Hi</div>
 
-  <!-- ChatKit Widget -->
   <script>
     window.CHATBOT_API_URL = window.location.origin;
-    window.CHATBOT_TITLE = 'TechStore Assistant';
+    window.CHATBOT_TITLE = 'OrbitAI Assistant';
   </script>
-  <script src="/chatbot.js" async></script>
+  <script>
+    (function loadChatbotWidget() {
+      var isLocal =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === '::1';
+
+      var script = document.createElement('script');
+      if (isLocal) {
+        script.type = 'module';
+        script.src = '/src/widget-entry.jsx';
+      } else {
+        script.src = '/chatbot.js';
+        script.async = true;
+      }
+      document.head.appendChild(script);
+    })();
+  </script>
 
   <script>
-    // Simple cart functionality
     let cartCount = 0;
     document.querySelectorAll('.add-to-cart').forEach(button => {
       button.addEventListener('click', function() {
         cartCount++;
-        document.querySelector('.cart-icon').textContent = `🛍️ Cart (${cartCount})`;
         this.textContent = 'Added!';
-        this.style.background = '#48bb78';
+        this.style.background = '#16a34a';
         setTimeout(() => {
-          this.textContent = 'Add to Cart';
+          this.textContent = 'Explore';
           this.style.background = '';
         }, 2000);
       });
     });
+  </script>
+  <script>
+    (function showChatTip() {
+      var tip = document.getElementById('chatbot-tip');
+      if (!tip) return;
+      setTimeout(function() {
+        tip.classList.add('show');
+      }, 500);
+      setTimeout(function() {
+        tip.classList.remove('show');
+      }, 3500);
+    })();
   </script>
 </body>
 </html>
